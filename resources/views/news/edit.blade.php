@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="mt-6">
-                            <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2">Update News</button>
+                            <button type="submit" class="bg-blue-500 text-black rounded-md px-4 py-2">Update News</button>
                         </div>
                     </div>
                 </form>

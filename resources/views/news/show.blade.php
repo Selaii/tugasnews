@@ -17,6 +17,19 @@
                 </div>
 
                 <div class="p-6 border-t">
+                    @if (Auth::check() && Auth::user()->is_admin)
+                        <div class="flex justify-between mb-4">
+                            <a href="{{ route('news.edit', $news) }}" class="bg-blue-500 text-black rounded-md px-4 py-2">Edit News</a>
+                            <form method="POST" action="{{ route('news.destroy', $news) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                            </form>
+                        </div>
+                    @endif
+
+
+                    <h3 class="font-semibold">Comments:</h3>
                     <form method="POST" action="{{ route('news.comment', $news) }}">
                         @csrf
 
@@ -31,7 +44,6 @@
                     </form>
 
                     <div class="mt-4">
-                        <h3 class="font-semibold">Comments:</h3>
                         @foreach ($news->comments as $comment)
                             <div class="mt-2">
                                 <p>{{ $comment->body }}</p>

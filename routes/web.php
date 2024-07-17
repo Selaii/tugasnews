@@ -37,7 +37,11 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk berita
     Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
     Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
+    Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
+    Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
     Route::post('/news/{news}/comment', [NewsController::class, 'comment'])->name('news.comment');
     Route::delete('/comments/{comment}', [NewsController::class, 'destroyComment'])->name('comments.destroy');
 
@@ -45,14 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Route untuk mengelola berita
-    Route::resource('news', NewsController::class);
-
-    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
-    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
-    Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
 });
 
 // Route untuk admin (uncomment if needed)
@@ -61,4 +57,3 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
 //     Route::post('/news', [NewsController::class, 'store'])->name('news.store');
 // });
-

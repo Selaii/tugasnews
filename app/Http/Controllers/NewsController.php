@@ -61,8 +61,19 @@ class NewsController extends Controller
         return redirect()->back()->with('status', 'Comment deleted successfully!');
     }
     
-    public function update(NewsRequest $request, News $news)
+    public function edit(News $news)
     {
+        return view('news.edit', compact('news'));
+    }
+
+    public function update(Request $request, News $news)
+    {
+        $request->validate([
+            'headline' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'text' => 'required|string',
+        ]);
+
         $news->headline = $request->headline;
 
         if ($request->hasFile('image')) {
@@ -72,7 +83,17 @@ class NewsController extends Controller
         $news->text = $request->text;
         $news->save();
 
-        return redirect()->route('dashboard')->with('status', 'News updated successfully!');
+        return redirect()->route('home')->with('status', 'News updated successfully!');
     }
+
+    public function destroy(News $news)
+    {
+        $news->delete();
+        return redirect()->route('home')->with('status', 'News deleted successfully!');
+    }
+
+    
+    
+    
 
 }
