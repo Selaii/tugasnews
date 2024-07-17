@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
             {{ $news->headline }}
         </h2>
     </x-slot>
@@ -9,13 +9,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 text-center">
-                    <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->headline }}" class="mx-auto" style="width: 500px; height: auto; object-fit: cover;">
-                    <p>{{ $news->text }}</p>
+                    <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->headline }}" class="mx-auto my-8" style="width: 300px; height: auto; object-fit: cover;">
+                </div>
+
+                <div class="p-6">
+                    <p class="text-left">{{ $news->text }}</p> <!-- Text aligned to the left -->
                 </div>
 
                 <div class="p-6 border-t">
                     <form method="POST" action="{{ route('news.comment', $news) }}">
                         @csrf
+
                         <div>
                             <label for="comment" class="block font-medium text-sm text-gray-700">Comment</label>
                             <textarea id="comment" name="body" required class="mt-1 block w-full border-gray-300 rounded-md"></textarea>
